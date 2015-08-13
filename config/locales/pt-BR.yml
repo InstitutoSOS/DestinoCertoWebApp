@@ -3,8 +3,8 @@ pt-BR:
 
   materials:
     metal: Metal
-    plastic: Plástico
-    paper: Papél
-    aluminium: Alumínio
+    plastico: Plástico
+    papel: Papél
+    aluminio: Alumínio
     tetrapack: Tetrapack
-    others: Outros
+    outros: Outros
