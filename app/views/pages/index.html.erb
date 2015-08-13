@@ -2,4 +2,8 @@
   <div class="search">
     <%= material_list %>
   </div>
+
+  <%= form_tag '/results' do %>
+    <?= hidden_field_tag 'material' ?>
+  <% end %>
 </div>
