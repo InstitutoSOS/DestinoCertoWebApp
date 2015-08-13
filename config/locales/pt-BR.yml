@@ -1,2 +1,10 @@
 pt-BR:
   site_name: Destino Certo
+
+  materials:
+    metal: Metal
+    plastic: Plástico
+    paper: Papél
+    aluminium: Alumínio
+    tetrapack: Tetrapack
+    others: Outros
