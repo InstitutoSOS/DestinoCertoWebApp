@@ -1,9 +1,19 @@
 <div class="container">
-  <div class="search">
-    <%= material_list %>
+  <div class="content">
+    <span></span>
   </div>
 
-  <%= form_tag '/results' do %>
-    <?= hidden_field_tag 'material' ?>
+  <div class="search">
+    <div class="material-list">
+      <%= material_list %>
+    </div>
+
+    <div class="material-submit">
+      <button class="search-button" data-submit>Procurar</button>
+    </div>
+  </div>
+
+  <%= form_tag('/materiais', method: :get) do %>
+    <?= hidden_field_tag(:material) ?>
   <% end %>
 </div>
