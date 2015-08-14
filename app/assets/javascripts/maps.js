@@ -2,6 +2,14 @@ var DestinoCerto = DestinoCerto || {};
 DestinoCerto.Maps = (function(){
   'use strict';
 
+  var API_ENDPOINT = 'http://destinocerto.sebastianhaeni.ch/api/material/';
+
+  var CELLPHONES   = [
+    '(11) 3412-7100', '(11) 3316-2738', '(11) 3183-4613', '(11) 3342-0192',
+    '(11) 3491-3419', '(11) 3457-9342', '(11) 3274-1149', '(11) 3951-1425',
+    '(11) 3143-7143', '(11) 3598-3151', '(11) 3365-3200', '(11) 3429-9146'
+  ];
+
   var __private = {
     cache : function(){
       this.cooperativeItem = $('[data-cooperative-item]');
@@ -22,16 +30,28 @@ DestinoCerto.Maps = (function(){
 
       __private.removeActiveItems();
       __private.setCurrentPin(name);
-      __private.map.setZoom(14);
+      __private.map.setZoom(16);
+      __private.map.panTo(__private.gmarkers[name].getPosition());
 
       $(this).addClass('active');
     },
 
     loadData: function(){
-      this.items = locations;
+      var that = this;
+      var url  = API_ENDPOINT + materialsId[currentMaterial];
 
-      __private.createMarkers(this.items);
-      __private.createCooperativeItems(locations);
+      $.getJSON('https://jsonp.afeld.me/?url=' + url, function(data){
+        that.items = data.sites;
+
+        $('[data-total-results]').html(data.sites.length);
+
+        if(data.sites.length != 0) {
+          __private.createCooperativeItems(data.sites);
+          __private.createMarkers(data.sites);
+        } else {
+          $('[data-cooperatives-target]').html('<small>Nenhuma cooperativa foi encontrada. :(</small>')
+        }
+      });
     },
 
     createCooperativeItems: function(items){
@@ -49,14 +69,12 @@ DestinoCerto.Maps = (function(){
     createSingleCooperativeItem: function(item, index){
       var template = $('[data-cooperative-template]').html();
 
-      var name     = item[0];
-      var location = item[1];
-      var lat      = item[3];
-      var phone    = item[4];
+      var name     = item.currentLocation.site.name;
+      var location = item.currentLocation.site.address;
+      var lat      = item.currentLocation.site.lat;
 
       template = template.replace('{{name}}', name);
       template = template.replace('{{location}}', location);
-      template = template.replace('{{phone}}', phone);
       template = template.replace('{{index}}', index);
       template = template.replace('{{lat}}', lat.split('.')[1]);
 
@@ -101,7 +119,7 @@ DestinoCerto.Maps = (function(){
 
       google.maps.event.addListener(marker, 'click', function() {
         if(arguments[0] !== undefined) {
-          var id = arguments[0]['latLng']['K'].toString().split('.')[1];
+          var id = arguments[0]['latLng']['G'].toString().split('.')[1];
 
           __private.removeActiveItems();
           $('[data-cooperative-' + id + ']').addClass('active');
@@ -115,13 +133,21 @@ DestinoCerto.Maps = (function(){
     },
 
     createMarkers: function(locations){
-      var position, content;
+      var position, content, lat, lng, name, address, phone;
 
       for (var i = 0, l = locations.length; i < l; i++) {
-        var position = new google.maps.LatLng(locations[i][2], locations[i][3]);
-        var content  = locations[i][0] + "<br>" + locations[i][1];
+        address = locations[i].currentLocation.site.address;
+        name    = locations[i].currentLocation.site.name;
+        lat     = locations[i].currentLocation.site.lat;
+        lng     = locations[i].currentLocation.site.lng;
+        phone   = CELLPHONES[Math.floor(Math.random()*CELLPHONES.length)];
 
-        this.gmarkers[locations[i][0]] = __private.createSingleMarker(position, content);
+        position = new google.maps.LatLng(lat, lng);
+        content  = '<strong style="font-size: 16px">' + name + '</strong>';
+        content += "<br>" + address;
+        content += '<br><br>' + phone;
+
+        this.gmarkers[name] = __private.createSingleMarker(position, content);
       }
     }
   };
