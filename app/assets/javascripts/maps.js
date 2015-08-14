@@ -71,12 +71,14 @@ DestinoCerto.Maps = (function(){
 
       var name     = item.currentLocation.site.name;
       var location = item.currentLocation.site.address;
-      var lat      = item.currentLocation.site.lat;
+      var lat      = item.currentLocation.site.lat.split('.')[1];
+      var weight   = parseFloat(item.weight);
 
       template = template.replace('{{name}}', name);
       template = template.replace('{{location}}', location);
       template = template.replace('{{index}}', index);
-      template = template.replace('{{lat}}', lat.split('.')[1]);
+      template = template.replace('{{lat}}', lat);
+      template = template.replace('{{weight}}', weight);
 
       return template;
     },

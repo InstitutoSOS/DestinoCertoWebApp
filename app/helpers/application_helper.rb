@@ -24,7 +24,7 @@ module ApplicationHelper
 
     materials.each do |key, value|
       is_active = (key.to_s == current_material) ? 'active' : ''
-      links << link_to(value, "/material/#{key}/", class: is_active)
+      links << link_to(value, "/material/#{key}", class: is_active)
     end
 
     safe_join(links)

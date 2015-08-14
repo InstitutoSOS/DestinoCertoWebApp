@@ -11,6 +11,10 @@ DestinoCerto.HomePage= (function(){
       this.items.each(function(index) {
         $(this).delay(250 * index).fadeIn(1000);
       });
+
+      setTimeout(function(){
+        $('.about-us').fadeIn();
+      }, 1500)
     }
   };
 
