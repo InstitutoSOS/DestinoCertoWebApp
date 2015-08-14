@@ -11,6 +11,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '=1.11.2'
   gem 'rails-assets-modernizr'
   gem 'rails-assets-normalize.css'
+  gem 'rails-assets-highcharts'
 end
 
 group :development do
