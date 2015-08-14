@@ -1,19 +1,12 @@
-<div class="container">
-  <div class="content">
-    <span></span>
+<div class="content">
+  <div class="container">
+    <span>Encontre cooperativas e faça bons negócios!</span>
   </div>
+</div>
+
+<div class="container">
 
   <div class="search">
-    <div class="material-list">
-      <%= material_list %>
-    </div>
-
-    <div class="material-submit">
-      <button class="search-button" data-submit>Procurar</button>
-    </div>
+    <%= material_list %>
   </div>
-
-  <%= form_tag('/materiais', method: :get) do %>
-    <%= hidden_field_tag(:material) %>
-  <% end %>
 </div>
