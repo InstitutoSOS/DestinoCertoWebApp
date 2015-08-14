@@ -2,13 +2,16 @@
   <div class="container">
     <div class="logo">
       <figure>
-        <%= image_tag 'destinocerto-logo.png', alt: 'Logo do DestinoCerto', title: 'DestinoCerto' %>
+        <a href="/">
+          <%= image_tag 'destinocerto-logo.png', alt: 'Logo do DestinoCerto', title: 'DestinoCerto' %>
+        </a>
       </figure>
     </div>
 
     <div class="menu">
       <ul>
-        <li><a href="signup">Cadastrar Cooperativa!</a></li>
+        <li><%= link_to 'Sobre', 'sobre' %></li>
+        <li><%= link_to 'Estatísticas', 'estatisticas' %></li>
       </ul>
     </div>
   </div>
