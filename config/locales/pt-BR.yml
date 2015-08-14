@@ -2,9 +2,9 @@ pt-BR:
   site_name: Destino Certo
 
   materials:
-    metal: Metal
     plastico: Plástico
-    papel: Papél
+    vidro: Vidro
     aluminio: Alumínio
     tetrapack: Tetrapack
+    papel: Papel
     outros: Outros
