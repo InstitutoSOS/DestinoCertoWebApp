@@ -8,3 +8,11 @@ pt-BR:
     tetrapack: Tetrapack
     papel: Papel
     outros: Outros
+
+  materials_id:
+    plastico: 1
+    vidro: 2
+    aluminio: 3
+    tetrapack: 4
+    papel: 5
+    outros: 6

@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def material_id
+    t 'materials_id', scope: params[:material]
+  end
+
   def material_list
     materials = t 'materials'
     elements = []
