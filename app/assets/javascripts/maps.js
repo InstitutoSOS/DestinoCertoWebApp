@@ -156,6 +156,8 @@ DestinoCerto.Maps = (function(){
 
   return {
     init: function(){
+      if(typeof google === 'undefined') return;
+
       __private.cache();
       __private.bind();
 
