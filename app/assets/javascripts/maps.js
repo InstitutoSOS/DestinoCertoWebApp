@@ -30,7 +30,7 @@ DestinoCerto.Maps = (function(){
 
       __private.removeActiveItems();
       __private.setCurrentPin(name);
-      __private.map.setZoom(16);
+      __private.map.setZoom(15);
       __private.map.panTo(__private.gmarkers[name].getPosition());
 
       $(this).addClass('active');
@@ -45,7 +45,7 @@ DestinoCerto.Maps = (function(){
 
         $('[data-total-results]').html(data.sites.length);
 
-        if(data.sites.length != 0) {
+        if(data.sites && data.sites.length != 0) {
           __private.createCooperativeItems(data.sites);
           __private.createMarkers(data.sites);
         } else {
@@ -67,6 +67,10 @@ DestinoCerto.Maps = (function(){
     },
 
     createSingleCooperativeItem: function(item, index){
+      if(item.currentLocation == null) {
+        return '';
+      }
+
       var template = $('[data-cooperative-template]').html();
 
       var name     = item.currentLocation.site.name;
@@ -93,7 +97,7 @@ DestinoCerto.Maps = (function(){
 
     loadMap: function(){
       this.map = new google.maps.Map(document.querySelector('[data-map-target]'), {
-        zoom: 12,
+        zoom: 11,
         panControl: false,
         zoomControl: true,
         scaleControl: false,
